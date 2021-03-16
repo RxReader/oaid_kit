@@ -35,7 +35,8 @@ class _MyAppState extends State<MyApp> {
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
                           title: const Text('getOaid'),
-                          content: Text(const JsonEncoder.withIndent('  ').convert(supplier)),
+                          content: Text(const JsonEncoder.withIndent('  ')
+                              .convert(supplier)),
                         );
                       },
                     );
