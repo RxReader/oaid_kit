@@ -1,3 +1,7 @@
+## 0.0.2
+
+* 异常捕获
+
 ## 0.0.1
 
-* TODO: Describe initial release.
+* 初始版本
