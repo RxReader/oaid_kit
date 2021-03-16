@@ -1,6 +1,6 @@
 # oaid_kit
 
-A new flutter plugin project.
+Flutter plugin for Oaid.
 
 ## Getting Started
 

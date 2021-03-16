@@ -1,5 +1,5 @@
 group 'io.github.v7lin.oaid_kit'
-version '1.0'
+version '0.0.1'
 
 buildscript {
     repositories {
@@ -16,6 +16,11 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+
+        // 私仓
+        flatDir {
+            dirs project(':oaid_kit').file('libs')
+        }
     }
 }
 
@@ -26,8 +31,37 @@ android {
 
     defaultConfig {
         minSdkVersion 16
+
+        // library 混淆 -> 随 library 引用，自动添加到 apk 打包混淆
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     lintOptions {
         disable 'InvalidPackage'
     }
+
+    flavorDimensions 'vendor'
+
+    productFlavors {
+        vendor {
+            dimension 'vendor'
+
+            // library 混淆 -> 随 library 引用，自动添加到 apk 打包混淆
+            consumerProguardFiles 'consumer-vendor-rules.pro'
+        }
+    }
+
+    libraryVariants.all { variant ->
+        variant.mergeAssetsProvider.get().doLast{ task ->
+            println("try to delete 'supplierconfig.json' from library")
+            delete(fileTree(task.outputDir) { config ->
+                config.include("supplierconfig.json")
+            })
+        }
+    }
+}
+
+dependencies {
+    //
+    vendorImplementation(name: 'oaid_sdk_1.0.25', ext: 'aar')
 }

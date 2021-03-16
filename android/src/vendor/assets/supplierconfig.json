@@ -1,0 +1,18 @@
+{
+  "?supplier": "该文件不会打包到APK里，请自行复制一份到 app module 的 assets 文件夹下",
+  "supplier":{
+    "vivo":{
+      "?appid":"Vivo开放平台上架应用的AppID，例如：100215079",
+      "appid":"xxx"
+    },
+    "xiaomi":{
+
+    },
+    "huawei":{
+
+    },
+    "oppo":{
+
+    }
+  }
+}
