@@ -17,30 +17,34 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Oaid Kit'),
-        ),
-        body: ListView(
-          children: <Widget>[
-            ListTile(
-              title: const Text('getOaid'),
-              onTap: () async {
-                Supplier supplier = await Oaid.getOaid();
-                print(const JsonEncoder.withIndent('  ').convert(supplier));
-                await showCupertinoDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CupertinoAlertDialog(
-                      title: const Text('getOaid'),
-                      content: Text(const JsonEncoder.withIndent('  ').convert(supplier)),
+      home: Builder(
+        builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Oaid Kit'),
+            ),
+            body: ListView(
+              children: <Widget>[
+                ListTile(
+                  title: const Text('getOaid'),
+                  onTap: () async {
+                    Supplier supplier = await Oaid.getOaid();
+                    print(const JsonEncoder.withIndent('  ').convert(supplier));
+                    await showCupertinoDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: const Text('getOaid'),
+                          content: Text(const JsonEncoder.withIndent('  ').convert(supplier)),
+                        );
+                      },
                     );
                   },
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
