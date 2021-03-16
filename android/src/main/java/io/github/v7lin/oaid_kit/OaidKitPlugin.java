@@ -121,7 +121,7 @@ public class OaidKitPlugin implements FlutterPlugin, MethodCallHandler {
             // do nothing
             break;
         }
-      } catch (Exception e) {
+      } catch (Throwable e) {
         if (completed.compareAndSet(false, true)) {
           result.error("FAILED", e.getMessage(), null);
         }
