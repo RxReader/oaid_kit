@@ -10,8 +10,8 @@ class Oaid {
       MethodChannel('v7lin.github.io/oaid_kit');
 
   static Future<Supplier> getOaid() async {
-    Map<String, dynamic> result =
+    final Map<String, dynamic>? result =
         await _channel.invokeMapMethod<String, dynamic>('getOaid');
-    return Supplier.fromJson(result);
+    return Supplier.fromJson(result!);
   }
 }

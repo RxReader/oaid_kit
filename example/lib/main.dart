@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
                 ListTile(
                   title: const Text('getOaid'),
                   onTap: () async {
-                    Supplier supplier = await Oaid.getOaid();
+                    final Supplier supplier = await Oaid.getOaid();
                     print(const JsonEncoder.withIndent('  ').convert(supplier));
                     await showCupertinoDialog<void>(
                       context: context,

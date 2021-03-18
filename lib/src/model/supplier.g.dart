@@ -9,9 +9,9 @@ part of 'supplier.dart';
 Supplier _$SupplierFromJson(Map<String, dynamic> json) {
   return Supplier(
     isSupported: json['is_supported'] as bool,
-    oaid: json['oaid'] as String,
-    vaid: json['vaid'] as String,
-    aaid: json['aaid'] as String,
+    oaid: json['oaid'] as String?,
+    vaid: json['vaid'] as String?,
+    aaid: json['aaid'] as String?,
   );
 }
 
