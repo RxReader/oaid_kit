@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:oaid_kit/oaid_kit.dart';
 
@@ -9,8 +10,12 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({
+    super.key,
+  });
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<StatefulWidget> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -21,22 +26,27 @@ class _MyAppState extends State<MyApp> {
         builder: (BuildContext context) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Oaid Kit'),
+              title: Text('Oaid Kit'),
             ),
             body: ListView(
               children: <Widget>[
                 ListTile(
-                  title: const Text('getOaid'),
+                  title: Text('getOaid'),
                   onTap: () async {
-                    final Supplier supplier = await Oaid.getOaid();
-                    print(const JsonEncoder.withIndent('  ').convert(supplier));
+                    final Supplier supplier = await Oaid.instance.getOaid();
+                    if (kDebugMode) {
+                      print(
+                          const JsonEncoder.withIndent('  ').convert(supplier));
+                    }
                     await showCupertinoDialog<void>(
                       context: context,
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
-                          title: const Text('getOaid'),
-                          content: Text(const JsonEncoder.withIndent('  ')
-                              .convert(supplier)),
+                          title: Text('getOaid'),
+                          content: Text(
+                            JsonEncoder.withIndent('  ').convert(supplier),
+                            textAlign: TextAlign.start,
+                          ),
                         );
                       },
                     );

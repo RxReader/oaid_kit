@@ -1,16 +1,33 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:oaid_kit/src/model/supplier.dart';
+import 'package:oaid_kit/src/oaid.dart';
+import 'package:oaid_kit/src/oaid_kit_method_channel.dart';
+import 'package:oaid_kit/src/oaid_kit_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+class MockOaidKitPlatform
+    with MockPlatformInterfaceMixin
+    implements OaidKitPlatform {
+  @override
+  Future<Supplier> getOaid() {
+    return Future<Supplier>.value(Supplier(
+      isSupported: false,
+    ));
+  }
+}
 
 void main() {
-  const MethodChannel channel = MethodChannel('v7lin.github.io/oaid_kit');
+  final OaidKitPlatform initialPlatform = OaidKitPlatform.instance;
 
-  TestWidgetsFlutterBinding.ensureInitialized();
-
-  setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {});
+  test('$MethodChannelOaidKit is the default instance', () {
+    expect(initialPlatform, isInstanceOf<MethodChannelOaidKit>());
   });
 
-  tearDown(() {
-    channel.setMockMethodCallHandler(null);
+  test('getOaid', () async {
+    final MockOaidKitPlatform fakePlatform = MockOaidKitPlatform();
+    OaidKitPlatform.instance = fakePlatform;
+
+    final Supplier supplier = await Oaid.instance.getOaid();
+    expect(supplier.isSupported, false);
   });
 }

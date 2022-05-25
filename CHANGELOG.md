@@ -1,3 +1,7 @@
+## 1.0.0
+
+* 升级 Flutter 3.0
+
 ## 0.1.0
 
 * nullsafety
