@@ -49,10 +49,6 @@ android {
 
             // library 混淆 -> 随 library 引用，自动添加到 apk 打包混淆
             consumerProguardFiles 'consumer-vendor-rules.pro'
-
-            ndk {
-                abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-            }
         }
     }
 
